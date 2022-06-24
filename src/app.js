@@ -80,8 +80,10 @@ const getDocument = async () =>{
 
     try{
         const result = await PlayList
-        .find({ courseType: {$in:["Backend", "Database"]}})
+        .find({ $and:[{courseType:["Backend", "Database"]},
+             {videos:{$gt: 50}}]})
         .select({name: 1})
+        .countDocuments();
         //.limit(1);
         console.log(result);
     } catch(err){
